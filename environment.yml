@@ -155,7 +155,6 @@ dependencies:
   - libiconv=1.17
   - liblapack=3.9.0
   - libllvm13=13.0.1
-  - liblzma=5.6.3
   - libmamba=0.27.0
   - libmambapy=0.27.0
   - libnghttp2=1.51.0
@@ -325,7 +324,6 @@ dependencies:
   - xarray=0.19.0
   - xorg-libxau=1.0.12
   - xorg-libxdmcp=1.1.5
-  - xz=5.2.5
   - yaml=0.2.5
   - yaml-cpp=0.7.0
   - yarl=1.18.3
