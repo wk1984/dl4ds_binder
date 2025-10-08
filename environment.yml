@@ -183,7 +183,6 @@ dependencies:
   - libzlib=1.2.13
   - lz4-c=1.9.3
   - lzo=2.10
-  - mamba
   - markdown=3.6
   - markupsafe=3.0.2
   - matplotlib=3.4.3
