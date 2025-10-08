@@ -1,5 +1,5 @@
 # 使用带有CUDA的官方PyTorch镜像作为基础
-FROM tensorflow/tensorflow:2.13.0-gpu
+FROM tensorflow/tensorflow:2.13.0-gpu-jupyter
 # FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/tensorflow/tensorflow:2.6.0-gpu
 
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
