@@ -1,13 +1,14 @@
-FROM tensorflow/tensorflow:2.8.0-gpu
+# 使用带有CUDA的官方PyTorch镜像作为基础
+FROM tensorflow/tensorflow:2.12.0-gpu
+# FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/tensorflow/tensorflow:2.6.0-gpu
 
-USER root
-RUN apt-get update && apt-get install -y xorg git
+ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 
-USER $NB_USER
-RUN conda install mamba -y -n base -c conda-forge && \
-    conda create -n climate4R && \
-    source /opt/conda/bin/activate climate4R && \
-    mamba install -y -n climate4R -c conda-forge -c r -c defaults -c santandermetgroup \
-                  r-climate4r=2.5.3 \
-                  jupyter_contrib_nbextensions jupyter_nbextensions_configurator nbgitpuller r-irkernel && \
-    R --vanilla -e 'IRkernel::installspec()'
+RUN apt-get update && \
+    apt-get install -y libgeos++-dev ffmpeg libsm6 libxext6 nano
+
+RUN pip install dl4ds climetlab==0.24.0 pyodc==1.4.1 h5py==3.1.0 scikit-learn opencv-python cartopy==0.21.0
+
+RUN python -c "import dl4ds as dds; import climetlab as cml"
+
+# RUN python -c "import tensorflow as tf; tf.config.list_physical_devices('GPU')"
