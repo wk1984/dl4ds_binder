@@ -9,7 +9,7 @@ RUN apt-get update && \
 	
 RUN python --version
 
-RUN pip install dl4ds climetlab scikit-learn #==0.24.0 pyodc==1.4.1 h5py==3.1.0 scikit-learn opencv-python cartopy==0.21.0
+RUN pip install dl4ds climetlab scikit-learn notebook jupyterlab #==0.24.0 pyodc==1.4.1 h5py==3.1.0 scikit-learn opencv-python cartopy==0.21.0
 
 RUN python -c "import dl4ds as dds; import climetlab as cml"
 
