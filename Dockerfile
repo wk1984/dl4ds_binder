@@ -1,12 +1,28 @@
 # 使用带有CUDA的官方PyTorch镜像作为基础
-FROM tensorflow/tensorflow:2.13.0-gpu-jupyter
-# FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/tensorflow/tensorflow:2.6.0-gpu
+FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
+#FROM ubuntu:20.04
+
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends wget make m4 patch build-essential ca-certificates cmake curl nano git \
+#     && apt-get install -y --no-install-recommends libgeos-dev libproj-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
+ENV PYENV_ROOT=$HOME/.pyenv
+ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
 RUN apt-get update && \
     apt-get install -y libgeos++-dev ffmpeg libsm6 libxext6 nano
-	
+
+RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
+RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+RUN pyenv install 3.9.13
+RUN pyenv global 3.9.13
+RUN pyenv rehash
+RUN pip install -U pip pipenv	
+
 RUN python --version
 
 RUN pip install climetlab climetlab_maelstrom_downscaling maelstrom
