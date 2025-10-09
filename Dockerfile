@@ -8,6 +8,8 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
 #     && apt-get install -y --no-install-recommends libgeos-dev libproj-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+    
+ENV HOME=/root
 
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 ENV PYENV_ROOT=$HOME/.pyenv
