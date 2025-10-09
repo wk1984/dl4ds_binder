@@ -2,6 +2,6 @@ name: base
 channels:
   - conda-forge
 dependencies:
-  - tensorflow==2.12.0
+  - tensorflow==2.12.1
   - pip
 prefix: /opt/miniforge
