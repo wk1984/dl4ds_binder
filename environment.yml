@@ -1,10 +1,7 @@
 name: base
 channels:
-  - defaults
+  - conda-forge
 dependencies:
-  - conda
-  - python=3.9
-  - mamba
   - jupyterlab==4.3.4
   - jupyter==1.1.1
   - notebook==7.3.2
