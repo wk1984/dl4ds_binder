@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.6.1-jupyter
+FROM ubuntu/python:3.8-20.04_stable
 
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 
