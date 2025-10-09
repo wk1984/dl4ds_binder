@@ -2,6 +2,7 @@ name: base
 channels:
   - conda-forge
 dependencies:
+  - python==3.9.13
   - cartopy==0.21.0
   - numpy==1.19.5
   - pandas==1.3.5
