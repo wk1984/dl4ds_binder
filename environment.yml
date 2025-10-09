@@ -17,7 +17,6 @@ dependencies:
   - matplotlib==3.4.3
   - xarray==0.19.0
   - tensorflow==2.6.0
-  - tensorflow-gpu==2.6.0
   - tensorflow-estimator==2.6.0
   - keras==2.6.0
   - scikit-learn==1.0
