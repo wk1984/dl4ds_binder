@@ -1,4 +1,3 @@
-# 使用带有CUDA的官方PyTorch镜像作为基础
 FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
 #FROM ubuntu:20.04
 
@@ -8,31 +7,50 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
 #     && apt-get install -y --no-install-recommends libgeos-dev libproj-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-    
-ENV HOME=/root
 
-ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
-ENV PYENV_ROOT=$HOME/.pyenv
-ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+# RUN python3 -V
 
-RUN apt-get update && \
-    apt-get install -y libgeos++-dev ffmpeg libsm6 libxext6 nano
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh -O ~/miniforge.sh \
+# RUN wget --quiet https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py38_23.9.0-0-Linux-x86_64.sh -O ~/miniforge.sh \
+    && /bin/bash ~/miniforge.sh -b -p /opt/miniforge \
+    && rm ~/miniforge.sh \
+    && ln -s /opt/miniforge/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
+    && echo ". /opt/miniforge/etc/profile.d/conda.sh" >> ~/.bashrc
 
-RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
-RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
-RUN pyenv install 3.9.13
-RUN pyenv global 3.9.13
-RUN pyenv rehash
-RUN pip install -U pip pipenv	
+ENV PATH /opt/miniforge/bin:${PATH}
+ARG PATH /opt/miniforge/bin:${PATH}
+ENV HDF5_DIR /opt/miniforge/
+ENV NETCDF4_DIR /opt/miniforge/ 
+ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL True
 
-RUN python --version
+RUN . /root/.bashrc \
+    && /opt/miniforge/bin/conda init bash \
+    && conda info --envs \
+#    && conda config --set custom_channels.conda-forge https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/ \
+    && conda install -c conda-forge mamba -y
 
-RUN pip install climetlab climetlab_maelstrom_downscaling maelstrom
+RUN python -m pip install pip==20.2 # -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
-RUN python -c "import climetlab as cml; \
-               cmlds_train = cml.load_dataset("maelstrom-downscaling", dataset="training"); \
-               cmlds_val = cml.load_dataset("maelstrom-downscaling", dataset="validation"); \
-               cmlds_test = cml.load_dataset("maelstrom-downscaling", dataset="testing"); \
-               t2m_hr_train = cmlds_train.to_xarray().t2m_tar"
+RUN . /root/.bashrc \
+#    && conda config --set custom_channels.conda-forge https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/ \
+    && mamba install -c conda-forge jupyterlab==4.3.4 jupyter==1.1.1 notebook==7.3.2 cython==3.0.11 shapely==1.8.4 cartopy==0.21.0 numpy==1.19.5 pandas==1.3.5 scipy==1.7.1 matplotlib==3.4.3 xarray==0.19.0 tensorflow==2.6.0 tensorflow-gpu==2.6.0 tensorflow-estimator==2.6.0 keras==2.6.0 scikit-learn==1.0 joblib==1.1.1 seaborn==0.11.2 absl-py==0.14.1 -y
 
-# RUN python -c "import tensorflow as tf; tf.config.list_physical_devices('GPU')"
+RUN pip install ecubevis==1.0.2 eccodes==2.37.0 dask==2022.12.0 climetlab==0.24.0 climetlab-maelstrom-downscaling==0.4.0 cfgrib==0.9.15.0 contourpy==1.3.0 protobuf==3.19.6 cartopy==0.21.0 numpy==1.19.5
+
+RUN git clone https://github.com/wk1984/dl4ds_fixed.git \
+     && cd dl4ds_fixed \
+     && pip install -e . \
+     && pip install -e . \
+     && python -c "import dl4ds"
+
+RUN jupyter-notebook --generate-config
+RUN python -c "from jupyter_server.auth import passwd; print(\"c.ServerApp.password = u'\" +  passwd('123456') + \"'\")" >> /root/.jupyter/jupyter_notebook_config.py
+
+RUN echo c.ServerApp.allow_origin = \'*\'  >> /root/.jupyter/jupyter_notebook_config.py
+RUN echo c.ServerApp.allow_remote_access = True >> /root/.jupyter/jupyter_notebook_config.py
+RUN echo c.ServerApp.ip = \'*\' >> /root/.jupyter/jupyter_notebook_config.py
+RUN echo c.ServerApp.open_browser = False >> /root/.jupyter/jupyter_notebook_config.py
+RUN echo "c.ServerApp.terminado_settings = { \"shell_command\": [\"/usr/bin/bash\"] }" >> /root/.jupyter/jupyter_notebook_config.py
+
+# WORKDIR /root/
+CMD ["jupyter-lab",  "--ip=0.0.0.0"  , "--no-browser" ,  "--allow-root"]
