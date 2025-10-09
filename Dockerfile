@@ -9,7 +9,7 @@ RUN apt-get update && \
 	
 RUN python --version
 
-RUN pip install climetlab climetlab_maelstrom_downscaling
+RUN pip install climetlab climetlab_maelstrom_downscaling maelstrom
 
 RUN python -c "import climetlab as cml; \
                cmlds_train = cml.load_dataset("maelstrom-downscaling", dataset="training"); \
