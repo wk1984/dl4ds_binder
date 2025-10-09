@@ -45,14 +45,14 @@ RUN git clone https://github.com/wk1984/dl4ds_fixed.git \
      && pip install -e . \
      && python -c "import dl4ds"
 
-RUN jupyter-notebook --generate-config
-RUN python -c "from jupyter_server.auth import passwd; print(\"c.ServerApp.password = u'\" +  passwd('123456') + \"'\")" >> /root/.jupyter/jupyter_notebook_config.py
+#RUN jupyter-notebook --generate-config
+#RUN python -c "from jupyter_server.auth import passwd; print(\"c.ServerApp.password = u'\" +  passwd('123456') + \"'\")" >> /root/.jupyter/jupyter_notebook_config.py
 
-RUN echo c.ServerApp.allow_origin = \'*\'  >> /root/.jupyter/jupyter_notebook_config.py
-RUN echo c.ServerApp.allow_remote_access = True >> /root/.jupyter/jupyter_notebook_config.py
-RUN echo c.ServerApp.ip = \'*\' >> /root/.jupyter/jupyter_notebook_config.py
-RUN echo c.ServerApp.open_browser = False >> /root/.jupyter/jupyter_notebook_config.py
-RUN echo "c.ServerApp.terminado_settings = { \"shell_command\": [\"/usr/bin/bash\"] }" >> /root/.jupyter/jupyter_notebook_config.py
+#RUN echo c.ServerApp.allow_origin = \'*\'  >> /root/.jupyter/jupyter_notebook_config.py
+#RUN echo c.ServerApp.allow_remote_access = True >> /root/.jupyter/jupyter_notebook_config.py
+#RUN echo c.ServerApp.ip = \'*\' >> /root/.jupyter/jupyter_notebook_config.py
+#RUN echo c.ServerApp.open_browser = False >> /root/.jupyter/jupyter_notebook_config.py
+#RUN echo "c.ServerApp.terminado_settings = { \"shell_command\": [\"/usr/bin/bash\"] }" >> /root/.jupyter/jupyter_notebook_config.py
 
 # WORKDIR /root/
-CMD ["jupyter-lab",  "--ip=0.0.0.0"  , "--no-browser" ,  "--allow-root"]
+#CMD ["jupyter-lab",  "--ip=0.0.0.0"  , "--no-browser" ,  "--allow-root"]
