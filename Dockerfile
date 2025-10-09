@@ -9,8 +9,12 @@ RUN apt-get update && \
 	
 RUN python --version
 
-RUN pip install dl4ds climetlab scikit-learn notebook jupyterlab #==0.24.0 pyodc==1.4.1 h5py==3.1.0 scikit-learn opencv-python cartopy==0.21.0
+RUN pip install climetlab climetlab_maelstrom_downscaling
 
-RUN python -c "import dl4ds as dds; import climetlab as cml"
+RUN python -c "import climetlab as cml; \
+               cmlds_train = cml.load_dataset("maelstrom-downscaling", dataset="training"); \
+               cmlds_val = cml.load_dataset("maelstrom-downscaling", dataset="validation"); \
+               cmlds_test = cml.load_dataset("maelstrom-downscaling", dataset="testing"); \
+               t2m_hr_train = cmlds_train.to_xarray().t2m_tar"
 
 # RUN python -c "import tensorflow as tf; tf.config.list_physical_devices('GPU')"
