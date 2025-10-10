@@ -39,8 +39,8 @@ RUN pip install --no-cache notebook jupyterlab \
                            dl4ds \
                            tensorflow==2.8.0 keras==2.8.0 \
 #						   protobuf==3.19.6 pandas==1.3.5 matplotlib==3.5.3 \
-						   scikit-learn \
-						   -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+						   scikit-learn
+#						   -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # 
 # RUN python -c "import dl4ds as dds; import climetlab as cml"
 
