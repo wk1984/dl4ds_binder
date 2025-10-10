@@ -31,9 +31,11 @@ RUN . /root/.bashrc \
 
 RUN python -m pip install pip==20.2 # -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
+RUN pip install pyodc==1.4.1
+
 RUN . /root/.bashrc \
 #    && conda config --set custom_channels.conda-forge https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/ \
-    && mamba install -c conda-forge pyodc==1.4.1 jupyterlab==4.3.4 jupyter==1.1.1 notebook==7.3.2 cython==3.0.11 shapely==1.8.4 cartopy==0.21.0 numpy==1.19.5 pandas==1.3.5 scipy==1.7.1 matplotlib==3.4.3 xarray==0.19.0 tensorflow==2.6.0 tensorflow-gpu==2.6.0 tensorflow-estimator==2.6.0 keras==2.6.0 scikit-learn==1.0 joblib==1.1.1 seaborn==0.11.2 absl-py==0.14.1 -y
+    && mamba install -c conda-forge jupyterlab==4.3.4 jupyter==1.1.1 notebook==7.3.2 cython==3.0.11 shapely==1.8.4 cartopy==0.21.0 numpy==1.19.5 pandas==1.3.5 scipy==1.7.1 matplotlib==3.4.3 xarray==0.19.0 tensorflow==2.6.0 tensorflow-gpu==2.6.0 tensorflow-estimator==2.6.0 keras==2.6.0 scikit-learn==1.0 joblib==1.1.1 seaborn==0.11.2 absl-py==0.14.1 -y
 
 RUN pip install ecubevis==1.0.2 eccodes==2.37.0 dask==2022.12.0 climetlab==0.24.0 climetlab-maelstrom-downscaling==0.4.0 cfgrib==0.9.15.0 contourpy==1.3.0 protobuf==3.19.6 cartopy==0.21.0 numpy==1.19.5
 
