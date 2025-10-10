@@ -28,6 +28,7 @@ ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 RUN . /root/.bashrc \
     && /opt/miniforge/bin/conda init bash \
     && conda info --envs \
+    && conda update -n base -c defaults conda \
 #    && conda config --set custom_channels.conda-forge https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/ \
     && conda install -c conda-forge mamba -y
 
