@@ -35,7 +35,10 @@ ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 # 
 # RUN python -m pip install pip==20.2 # -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # 
-RUN pip install --no-cache notebook jupyterlab dl4ds -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+RUN pip install --no-cache notebook jupyterlab \
+                           dl4ds \
+                           tensorflow==2.6.0 scikit-learn \
+						   -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # 
 # RUN python -c "import dl4ds as dds; import climetlab as cml"
 
