@@ -35,6 +35,19 @@ ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 # 
 # RUN python -m pip install pip==20.2 # -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # 
-RUN pip install dl4ds -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+RUN pip install --no-cache notebook jupyterlab dl4ds -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # 
 # RUN python -c "import dl4ds as dds; import climetlab as cml"
+
+# create user with a home directory
+ARG NB_USER
+ARG NB_UID
+ENV USER ${NB_USER}
+ENV HOME /home/${NB_USER}
+
+RUN adduser --disabled-password \
+    --gecos "Default user" \
+    --uid ${NB_UID} \
+    ${NB_USER}
+WORKDIR ${HOME}
+USER ${USER}
