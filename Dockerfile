@@ -2,6 +2,8 @@ FROM condaforge/mambaforge:4.9.2-7
 
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 
+RUN pip install cartopy --no-binary :all:
+
 RUN pip install dl4ds climetlab climetlab_maelstrom_downscaling scikit-learn jupyterlab notebook
 
 # 7. Expose the default Jupyter port
