@@ -17,11 +17,11 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-Linux
     && ln -s /opt/miniforge/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
     && echo ". /opt/miniforge/etc/profile.d/conda.sh" >> ~/.bashrc
 
-ENV PATH /opt/miniforge/bin:${PATH}
-ARG PATH /opt/miniforge/bin:${PATH}
-ENV HDF5_DIR /opt/miniforge/
-ENV NETCDF4_DIR /opt/miniforge/ 
-ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL True
+ENV PATH=/opt/miniforge/bin:${PATH}
+ARG PATH=/opt/miniforge/bin:${PATH}
+ENV HDF5_DIR=/opt/miniforge/
+ENV NETCDF4_DIR=/opt/miniforge/ 
+ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 
 RUN . /root/.bashrc \
     && /opt/miniforge/bin/conda init bash \
@@ -37,10 +37,10 @@ RUN . /root/.bashrc \
 #    && conda config --set custom_channels.conda-forge https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/ \
     && mamba install -c conda-forge jupyterlab==4.3.4 jupyter==1.1.1 notebook==7.3.2 cython==3.0.11 shapely==1.8.4 cartopy==0.21.0 numpy==1.19.5 pandas==1.3.5 scipy==1.7.1 matplotlib==3.4.3 xarray==0.19.0 tensorflow==2.6.0 tensorflow-gpu==2.6.0 tensorflow-estimator==2.6.0 keras==2.6.0 scikit-learn==1.0 joblib==1.1.1 seaborn==0.11.2 absl-py==0.14.1 -y
 
-RUN pip install ecubevis==1.0.2 eccodes==2.37.0 dask==2022.12.0 climetlab==0.24.0 climetlab-maelstrom-downscaling==0.4.0 cfgrib==0.9.15.0 contourpy==1.3.0 protobuf==3.19.6 cartopy==0.21.0 numpy==1.19.5
+RUN pip install dl4ds ecubevis==1.0.2 eccodes==2.37.0 dask==2022.12.0 climetlab==0.24.0 climetlab-maelstrom-downscaling==0.4.0 cfgrib==0.9.15.0 contourpy==1.3.0 protobuf==3.19.6 cartopy==0.21.0 numpy==1.19.5
 
-RUN git clone https://github.com/wk1984/dl4ds_fixed.git \
-     && cd dl4ds_fixed \
-     && pip install -e . \
-     && pip install -e . \
-     && python -c "import dl4ds"
+# RUN git clone https://github.com/wk1984/dl4ds_fixed.git \
+#      && cd dl4ds_fixed \
+#      && pip install -e . \
+#      && pip install -e . \
+#      && python -c "import dl4ds"
