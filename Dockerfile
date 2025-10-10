@@ -1,10 +1,12 @@
-FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
-#FROM ubuntu:20.04
+#FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
+FROM ubuntu:20.04
 
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends wget make m4 patch build-essential ca-certificates cmake curl nano git \
-#     && apt-get install -y --no-install-recommends libgeos-dev libproj-dev \
+                                                  ffmpeg libsm6 libxext6 \
+                                                  libgeos-dev libproj-dev \
+#     && apt-get install -y --no-install-recommends libgeos-dev libproj-dev libgl1-mesa-glx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,12 +37,23 @@ RUN pip install pyodc==1.4.1
 
 RUN . /root/.bashrc \
 #    && conda config --set custom_channels.conda-forge https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/ \
-    && mamba install -c conda-forge jupyterlab==4.3.4 jupyter==1.1.1 notebook==7.3.2 cython==3.0.11 shapely==1.8.4 cartopy==0.21.0 numpy==1.19.5 pandas==1.3.5 scipy==1.7.1 matplotlib==3.4.3 xarray==0.19.0 tensorflow==2.6.0 tensorflow-gpu==2.6.0 tensorflow-estimator==2.6.0 keras==2.6.0 scikit-learn==1.0 joblib==1.1.1 seaborn==0.11.2 absl-py==0.14.1 -y
+    && mamba install -c conda-forge jupyterlab==4.3.4 jupyter==1.1.1 notebook==7.3.2 cython==3.0.11 shapely==1.8.4 \
+                                    cartopy==0.21.0 numpy==1.19.5 pandas==1.3.5 scipy==1.7.1 matplotlib==3.4.3 xarray==0.19.0 \
+                                    tensorflow==2.6.0 tensorflow-gpu==2.6.0 tensorflow-estimator==2.6.0 keras==2.6.0 \
+                                    scikit-learn==1.0 joblib==1.1.1 seaborn==0.11.2 absl-py==0.14.1 -y
 
-RUN pip install dl4ds ecubevis==1.0.2 eccodes==2.37.0 dask==2022.12.0 climetlab==0.24.0 climetlab-maelstrom-downscaling==0.4.0 cfgrib==0.9.15.0 contourpy==1.3.0 protobuf==3.19.6 cartopy==0.21.0 numpy==1.19.5
+RUN git clone https://github.com/wk1984/dl4ds_fixed.git \
+     && cd dl4ds_fixed \
+     && pip install -e . \
+     && pip install -e . \
+     && python -c "import dl4ds"
 
-# RUN git clone https://github.com/wk1984/dl4ds_fixed.git \
-#      && cd dl4ds_fixed \
-#      && pip install -e . \
-#      && pip install -e . \
-#      && python -c "import dl4ds"
+RUN pip install climetlab==0.24.0 climetlab-maelstrom-downscaling==0.4.0
+
+# RUN pip install ecubevis==1.0.2 eccodes==2.37.0 dask==2022.12.0 climetlab==0.24.0 climetlab-maelstrom-downscaling==0.4.0 \
+#                 cfgrib==0.9.15.0 contourpy==1.3.0 protobuf==3.19.6 cartopy==0.21.0 \
+#                 numpy==1.19.5 pandas==1.3.5 --use-feature=2020-resolver
+
+
+
+RUN python -c "import dl4ds as dds; import climetlab as cml"
