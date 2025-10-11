@@ -58,7 +58,7 @@ RUN conda create -n py39 python=3.9.13 -y && \
     # 激活环境
     . "$CONDA_DIR/bin/activate" py39 && \
 #     pip install --no-cache-dir -U pip && \
-    python -m pip install pip==20.2 && \
+#    python -m pip install pip==20.2 && \
     pip install --no-cache-dir \
         notebook==7.3.2 \
         jupyterlab==4.3.4 \
