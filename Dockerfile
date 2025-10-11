@@ -69,16 +69,3 @@ RUN pip install --no-cache notebook==7.3.2 jupyterlab==4.3.4 jupyter-server==2.1
  
 # RUN python -c "import dl4ds as dds; import climetlab as cml"
 # notebook==7.3.2 jupyter==1.1.1 jupyterlab==4.3.4 jupyter-server==2.15.0 referencing==0.35.1 typing-extensions==3.7.4.3 python-json-logger==2.0.7
-
-# create user with a home directory
-ARG NB_USER
-ARG NB_UID
-ENV USER=${NB_USER}
-ENV HOME=/home/${NB_USER}
-
-RUN adduser --disabled-password \
-    --gecos "Default user" \
-    --uid ${NB_UID} \
-    ${NB_USER}
-WORKDIR ${HOME}
-USER ${USER}
