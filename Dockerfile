@@ -5,11 +5,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     export DEBCONF_NONINTERACTIVE_SEEN=true \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends wget make m4 patch build-essential ca-certificates cmake curl nano git \
-                                                  ffmpeg libsm6 libxext6 \
-                                                  libgeos-dev libproj-dev \
+                                                  ffmpeg libsm6 libxext6 libgeos-dev libproj-dev \
 												  libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
 												  llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev \
-    && apt-get clean \
+	&& apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
@@ -28,7 +27,7 @@ RUN chmod -R u+rwx /workdir
 
 # RUN python -m pip install pip==20.2 # -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
-RUN pip install --no-cache dl4ds jupyterlab
+RUN pip install --no-cache dl4ds jupyterlab climetlab sklearn climetlab_maelstrom_downscaling
  
 # ---- 新增的测试步骤 ----
 # 在构建时测试 jupyter-lab 是否可以正常调用。
