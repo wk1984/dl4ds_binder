@@ -8,7 +8,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
                                                   ffmpeg libsm6 libxext6 \
                                                   libgeos-dev libproj-dev \
 												  libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
-												  llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
+												  llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
