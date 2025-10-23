@@ -1,5 +1,5 @@
 #FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
-FROM tensorflow/tensorflow:2.6.1-gpu-jupyter
+FROM tensorflow/tensorflow:2.6.1-jupyter
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     export DEBCONF_NONINTERACTIVE_SEEN=true \
