@@ -1,6 +1,18 @@
 #FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
 FROM tensorflow/tensorflow:2.6.1-gpu-jupyter
 
+RUN export DEBIAN_FRONTEND=noninteractive \
+    export DEBCONF_NONINTERACTIVE_SEEN=true \
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends wget make m4 patch build-essential ca-certificates cmake curl nano git \
+                                                  ffmpeg libsm6 libxext6 \
+                                                  libgeos-dev libproj-dev \
+												  libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
+												  llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
+#     && apt-get install -y --no-install-recommends libgeos-dev libproj-dev libgl1-mesa-glx \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 
 RUN useradd -m -s /bin/bash user && echo "user:111" | chpasswd
