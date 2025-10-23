@@ -48,7 +48,7 @@ RUN pip install --no-cache notebook==7.3.2 jupyterlab==4.3.4 jupyter-server==2.1
 						   protobuf==3.19.6 pandas==1.3.5 matplotlib==3.4.3 numpy==1.19.5 \
 						   scikit-learn python-json-logger==2.0.7 xarray==0.19.0 netCDF4==1.7.2 \
 						   jupyter-server==2.15.0 typing-extensions==3.7.4.3 bokeh==3.4.3 \ 
-						   Cartopy==0.21.0 scipy==1.7.1 eccodes==2.37.0 dask==2022.12.0
+						   Cartopy==0.21.0 scipy==1.7.1 eccodes==2.37.0 dask==2022.12.0 --use-feature=2020-resolver
 #						   holoviews==1.20.0 -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
 RUN pip install --no-cache pyodc==1.4.1 --use-feature=2020-resolver
