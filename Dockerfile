@@ -27,7 +27,7 @@ RUN chmod -R u+rwx /workdir
 
 # RUN python -m pip install pip==20.2 # -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
-RUN pip install --no-cache dl4ds jupyterlab climetlab sklearn climetlab_maelstrom_downscaling
+RUN pip install --no-cache dl4ds jupyterlab climetlab sklearn climetlab_maelstrom_downscaling scikit-learn==1.*
  
 # ---- 新增的测试步骤 ----
 # 在构建时测试 jupyter-lab 是否可以正常调用。
