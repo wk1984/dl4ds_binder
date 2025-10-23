@@ -79,3 +79,7 @@ USER user
 WORKDIR /workdir
 
 # CMD ["jupyter-lab",  "--ip=0.0.0.0"  , "--no-browser"]
+
+
+# conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0 python=3.9
+# pip install tensorflow==2.6 keras==2.6 dl4ds "numpy<2"
