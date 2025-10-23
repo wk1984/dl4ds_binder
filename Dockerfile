@@ -1,5 +1,5 @@
 #FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
-FROM tensorflow/tensorflow:2.6.1-jupyter
+FROM python:3.8.13
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     export DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -28,7 +28,7 @@ RUN chmod -R u+rwx /workdir
 
 # RUN python -m pip install pip==20.2 # -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
-RUN pip install --no-cache dl4ds
+RUN pip install --no-cache dl4ds jupyterlab
  
 # ---- 新增的测试步骤 ----
 # 在构建时测试 jupyter-lab 是否可以正常调用。
