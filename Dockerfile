@@ -27,7 +27,7 @@ RUN mamba install -c conda-forge -c nvidia --override-channels -y \
     cudatoolkit=11.2.* cudnn=8.1.* numpy=1.* && \
 	conda clean --all -y
 	
-RUN pip install tensorflow==2.10.* dl4ds climetlab climetlab_maelstrom_downscaling numpy==1.* && \
+RUN pip install tensorflow==2.12.* dl4ds climetlab climetlab_maelstrom_downscaling numpy==1.* && \
     rm -rf /tmp/* && \
     rm -rf ~/.cache/pip
 
