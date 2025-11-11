@@ -1,6 +1,4 @@
-FROM jupyter/base-notebook:python-3.9.13
-
-# registry.2i2c.mybinder.org/i-wk1984-2ddockertest-5fbinder-4487f3:b48e03e2a388616bfb584e54e0ba59500e68da25
+FROM jupyter/base-notebook:python-3.11
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
