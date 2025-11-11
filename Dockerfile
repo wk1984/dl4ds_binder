@@ -24,7 +24,7 @@ RUN conda install mamba -y -n base -c conda-forge
 
 RUN mamba install -c conda-forge -c nvidia --override-channels -y \
     cartopy hdf5 h5py netCDF4 scikit-learn ipywidgets \
-    cudatoolkit=11.2.* cudnn=8.1.* numpy=1.* && \
+    cudatoolkit=11.2.* cudnn=8.1.* && \
 	conda clean --all -y
 	
 RUN pip install tensorflow==2.12.* dl4ds climetlab climetlab_maelstrom_downscaling numpy==1.* && \
