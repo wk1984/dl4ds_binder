@@ -51,6 +51,6 @@ RUN echo "Testing Tensorflow installation in Python..." && \
 
 # 设置工作目录
 WORKDIR /home/jovyan/work
-RUN wget https://github.com/wk1984/dockertest_binder/blob/main/DL4DS_tutorial.ipynb
+# RUN wget https://github.com/wk1984/dl4ds_binder/blob/92e774938f34bd1e9331740c228d282a91d1dd90/DL4DS_tutorial.ipynb
 
 #CMD ["jupyter-lab",  "--ip=0.0.0.0"  , "--no-browser"]
